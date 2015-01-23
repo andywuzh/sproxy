@@ -1,1 +1,1 @@
-simple proxy implemented with erlang
+simple proxy implemented with Erlang, just for funny and learning.
