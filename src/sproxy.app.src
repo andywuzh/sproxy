@@ -1,12 +1,13 @@
-{application, simple_proxy,
+{application, sproxy,
  [
   {description, ""},
   {vsn, "0.0.1"},
   {registered, []},
   {applications, [
                   kernel,
-                  stdlib
+                  stdlib,
+                  sasl
                  ]},
-  {mod, { simple_proxy_app, []}},
+  {mod, { sproxy_app, []}},
   {env, []}
  ]}.

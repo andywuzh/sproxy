@@ -1,4 +1,4 @@
--module(simple_proxy_sup).
+-module(sproxy_sup).
 
 -behaviour(supervisor).
 

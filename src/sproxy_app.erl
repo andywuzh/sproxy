@@ -1,4 +1,4 @@
--module(simple_proxy_app).
+-module(sproxy_app).
 
 -behaviour(application).
 
@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    simple_proxy_sup:start_link().
+    sproxy_sup:start_link().
 
 stop(_State) ->
     ok.
