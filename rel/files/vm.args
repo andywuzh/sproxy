@@ -1,8 +1,8 @@
 ## Name of the node
--name simple_proxy@127.0.0.1
+-name sproxy@127.0.0.1
 
 ## Cookie for distributed erlang
--setcookie simple_proxy
+-setcookie sproxy
 
 ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
 ## (Disabled by default..use with caution!)

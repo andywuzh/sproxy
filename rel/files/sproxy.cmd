@@ -1,6 +1,6 @@
 @setlocal
 
-@set node_name=simple_proxy
+@set node_name=sproxy
 
 @rem Get the absolute path to the parent directory,
 @rem which is assumed to be the node root.

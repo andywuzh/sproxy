@@ -6,3 +6,5 @@ compile:
 clean:
 	@rebar -r clean
 
+release:
+	@cd rel && rebar generate

@@ -4,3 +4,4 @@ out
 ebin/
 deps/
 sproxy.iml
+rel/sproxy

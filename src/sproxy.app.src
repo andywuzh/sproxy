@@ -1,12 +1,11 @@
 {application, sproxy,
  [
   {description, ""},
-  {vsn, "0.0.1"},
+  {vsn, "0.1.0"},
   {registered, []},
   {applications, [
                   kernel,
-                  stdlib,
-                  sasl
+                  stdlib
                  ]},
   {mod, { sproxy_app, []}},
   {env, []}
