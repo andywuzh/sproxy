@@ -23,4 +23,19 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
-    {ok, { {one_for_one, 5, 10}, []} }.
+  RestartStrategy = one_for_one,
+  MaxRestarts = 1000,
+  MaxSecondsBetweenRestarts = 3600,
+
+  SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
+
+  Restart = permanent,
+  Shutdown = 2000,
+  Type = worker,
+
+  ListenSup = {tcp_listener_sup, {tcp_listener_sup, start_link, []},
+    Restart, Shutdown, Type, [tcp_listener_sup]},
+  AccepSup = {tcp_acceptor_sup, {tcp_acceptor_sup, start_link, []},
+    Restart, Shutdown, Type, [tcp_acceptor_sup]},
+
+  {ok, {SupFlags, [ListenSup, AccepSup]}}.

@@ -2,7 +2,7 @@
  [
   {description, ""},
   {vsn, "0.1.0"},
-  {registered, []},
+  {registered, [tcp_listen_sup, tcp_listen, tcp_acceptor_sup, tcp_acceptor]},
   {applications, [
                   kernel,
                   stdlib

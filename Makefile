@@ -1,10 +1,10 @@
 all: compile
 
 compile:
-	@rebar compile
+	./rebar compile
 
 clean:
-	@rebar -r clean
+	./rebar -r clean
 
 release:
-	@cd rel && rebar generate
+	cd rel && ../rebar generate

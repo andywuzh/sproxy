@@ -60,7 +60,47 @@ start_link() ->
   {ok, State :: #state{}} | {ok, State :: #state{}, timeout() | hibernate} |
   {stop, Reason :: term()} | ignore).
 init([]) ->
+  case gen_tcp:listen(5555, [binary, {active, false}]) of
+    {ok, LSock} -> start_listen(LSock);
+    {error, Reason} -> Reason
+  end,
   {ok, #state{}}.
+
+start_listen(LSock) ->
+  lists:foreach(fun (_) ->
+    spawn(fun () ->
+      case gen_tcp:accept(LSock) of
+        {ok, CSock} ->
+          io:format("accepted connecting by ~w [~w]!~n", [CSock, self()]),
+          on_connected(CSock),
+          start_listen(LSock);
+        {error, Reason} ->
+          Reason
+      end
+    end)
+    end, lists:duplicate(2, dummy)).
+%%   case gen_tcp:accept(LSock) of
+%%     {ok, CSock} ->
+%%       spawn(on_connected, [CSock]),
+%% %%       on_connected(CSock),
+%%       start_listen(LSock);
+%%     {error, Reason} -> Reason
+%%   end.
+
+on_connected(CSock) ->
+  inet:setopts(CSock, [{active, once}]),
+  receive
+    {tcp, CSock, Data} ->
+      io:format("got ~p from ~w [~w]~n", [Data, CSock, self()]),
+      gen_tcp:send(CSock, Data),
+      inet:setopts(CSock, [{active, false}]),
+      on_connected(CSock),
+      ok;
+    {tcp_closed, CSock} ->
+      io:format("Socket ~w closed [~w]~n", [CSock, self()]),
+      ok
+  end,
+  ok.
 
 %%--------------------------------------------------------------------
 %% @private

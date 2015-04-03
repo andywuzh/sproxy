@@ -66,8 +66,8 @@ init([]) ->
   Shutdown = 2000,
   Type = worker,
 
-  AChild = {'AName', {'AModule', start_link, []},
-    Restart, Shutdown, Type, ['AModule']},
+  AChild = {tcp_listener, {tcp_listener, start_link, []},
+    Restart, Shutdown, Type, [tcp_listener]},
 
   {ok, {SupFlags, [AChild]}}.
 
